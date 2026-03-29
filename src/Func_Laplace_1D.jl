@@ -3,7 +3,24 @@ module Func_Laplace_1D
 using LinearAlgebra
 export linear_solv, create_task
 
-# решение СЛАУ методом прогонки
+"""
+    linear_solv(A, b) -> y
+
+    Решение СЛАУ методом прогонки
+
+    # Аргументы
+    `A` - трехдиагональная матрица
+    `b` - правая часть СЛАУ
+
+    # Пример
+    ```jldoctest
+        julia> linear_solv(Tridiagonal([-1, 2], [3, 4, 3], [1, 2]), [1, -3, 5])
+        3-element Vector{Float64}:
+        1.0
+        -2.0
+        3.0000000000000004
+    ```
+"""
 function linear_solv(A, b)
     if (size(A, 1) != size(A, 2))
         throw("Argument error")
@@ -26,7 +43,27 @@ function linear_solv(A, b)
     end
     return y
 end
-# постановка задачи
+
+"""
+    create_task(lower_bound, upper_bound, f, N) -> (A, b)
+
+    Постановка обратной задачи одномерного уравнения Лапласа на отрезке [0, 1]
+
+    # Аргументы
+    `lower_bound` - нижнее граничное условие
+    `upper_bound` - верхнее граничное условие
+    `f` - вторая производная неизвестной функции
+    `N` - число точек для разбиения отрезка [0, 1]
+
+    # Пример
+    ```jldoctest
+        julia> N = 3
+        julia> u = x -> sin(3x) * cos(4x)
+        julia> f = x -> -25 * sin(3x) * cos(4x) - 24 * sin(4x) * cos(3x)
+        julia> A, b = create_task(u(0), u(1), f, N)
+        (Tridiagonal([-1], [2, 2], [-1]), [1.9502229726878755, -2.8459733453150107])
+    ```
+"""
 function create_task(lower_bound, upper_bound, f, N)
     # Создали сетку
     x = [i / N for i in 0:N]
