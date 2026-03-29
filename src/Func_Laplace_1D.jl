@@ -27,15 +27,15 @@ function linear_solv(A, b)
     return y
 end
 # постановка задачи
-function create_task(u, f, N)
+function create_task(lower_bound, upper_bound, f, N)
     # Создали сетку
     x = [i / N for i in 0:N]
     # Создали правую часть СЛАУ
     b = zeros(N - 1)
     h = 1 / N
     b[1:N - 1] .+= -f.(x[2:N])
-    b[1] += u(0) / h^2
-    b[N - 1] += u(1) / h^2
+    b[1] += lower_bound / h^2
+    b[N - 1] += upper_bound / h^2
     b .*= h^2
     # Создали матрицу СЛАУ
     dl = fill(-1, N - 2)
