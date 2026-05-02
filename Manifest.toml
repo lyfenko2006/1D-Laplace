@@ -2,7 +2,7 @@
 
 julia_version = "1.12.5"
 manifest_format = "2.0"
-project_hash = "50fb79ba764b9394eeb1e3d27914d993cdb932de"
+project_hash = "698dd96f23b3b587f4dc4b6814e31ae63e3f6029"
 
 [[deps.AliasTables]]
 deps = ["PtrArrays", "Random"]
@@ -350,7 +350,7 @@ uuid = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 version = "1.4.0"
 
 [[deps.Laplace_1D]]
-deps = ["Distances", "LinearAlgebra", "Plots", "Test"]
+deps = ["Distances", "LinearAlgebra", "Pkg", "Plots", "Test"]
 path = "."
 uuid = "48a410de-e506-47c2-ade3-69504058de4d"
 version = "0.1.0"
